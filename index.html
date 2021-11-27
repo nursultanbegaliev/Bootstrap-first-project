@@ -35,7 +35,7 @@
                     </li>
                 </ul>
                 <span class="navbar-text">
-                    <a data-toggle="modal" data-target="#loginModal">
+                    <a id="loginId">
                         <span class="fa fa-sign-in"></span> Login</a>
                 </span>
             </div>
@@ -170,8 +170,8 @@
                     <img src="img/logo.png" class="img-fluid">
                 </div>
                 <div class="col-12 col-sm-3 d-flex align-items-center justify-content-center">
-                    <a role="button" class="btn btn-block nav-link btn-warning" data-toggle="modal"
-                        data-target="#formModal">Reserve Table</a>
+                    <a role="button" id="reserveTable" class="btn btn-block nav-link btn-warning" 
+                         >Reserve Table</a>
                 </div>
             </div>
         </div>
@@ -231,14 +231,12 @@
                         <span class="carousel-control-next-icon"></span>
                     </a>
 
-                    <div class="btn-group" id="carouselButton">
-                        <button class="btn btn-danger btn-sm" id="carousel-pause">
-                            <span class="fa fa-pause"></span>
-                        </button>
-                        <button class="btn btn-danger btn-sm" id="carousel-play">
-                            <span class="fa fa-play"></span>
-                        </button>
-                    </div>
+                    
+                    <button class="btn btn-danger btn-sm" id="carouselButton">
+                        <span class="fa fa-pause"></span>
+                    </button>
+                        
+                    
                 </div>
             </div>
         </div>
@@ -356,13 +354,25 @@
     <script>
         $(document).ready(function() {
             $('#mycarousel').carousel( { interval: 2000 });
-            $('#carousel-pause').click(function() {
-                $('#mycarousel').carousel('pause');
+            $("#carouselButton").click(function(){
+                if ($("#carouselButton").children("span").hasClass('fa-pause')) {
+                    $("#mycarousel").carousel('pause');
+                    $("#carouselButton").children("span").removeClass('fa-pause');
+                    $("#carouselButton").children("span").addClass('fa-play');
+                }
+                else if ($("#carouselButton").children("span").hasClass('fa-play')){
+                    $("#mycarousel").carousel('cycle');
+                    $("#carouselButton").children("span").removeClass('fa-play');
+                    $("#carouselButton").children("span").addClass('fa-pause');                    
+                }
             });
-            $('#carousel-play').click(function() {
-                $('#mycarousel').carousel('cycle');
+            $("#reserveTable").click(function(){
+                $("#formModal").modal('show');
             });
-        })
+            $("#loginId").click(function(){
+                $("#loginModal").modal('show');
+            });
+        });
     </script>
 </body> 
 
